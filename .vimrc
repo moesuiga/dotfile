@@ -8,6 +8,8 @@ set encoding=utf-8
 set termencoding=utf-8
 " set file format to `unix`, it will show <CR> to ^M on the end of lines
 set fileformats=unix
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,big5,latin1
+set langmenu=zh_CN,UTF-8
 " }}}
 
 set autoread
@@ -18,7 +20,7 @@ if &term =~ 'xterm-256color'
     set t_Co = 256
   endif
 endif
-" put color scheme front so that some configurations are not overwritten.
+" put color scheme above so that some configurations are not overwritten.
 " such as `highlight SpecialKey ctermfg=5`
 colorscheme pablo
 " }}}
@@ -31,6 +33,8 @@ set showcmd
 " last window always show status line.
 " 0: never, 1: at least two windows, 2: always
 set ls=2 " laststatus
+" Show EOL type and last modified timestamp, right after the filename
+set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 " show current cursor position on status line
 set ruler
 " show line number

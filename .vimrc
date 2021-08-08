@@ -34,7 +34,34 @@ set showcmd
 " 0: never, 1: at least two windows, 2: always
 set ls=2 " laststatus
 " Show EOL type and last modified timestamp, right after the filename
-set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
+" %<
+" %F full path of file
+set statusline=%<%F
+" %h [Help]
+" %m [+] if modified, or [-] if modifiable is off
+" %r [RO] readonly
+" %w [Preview]
+set statusline+=%h%m%r%w
+" %y file type, e.g. [javascript]
+set statusline+=\ %y
+" fileformat, e.g. [unix]
+set statusline+=\ [%{&ff}]
+" file time
+set statusline+=\ (%{strftime(\"%Y/%m/%d\ %H:%M\",getftime(expand(\"%:p\")))})
+" right part
+" %= separation point between left and right aligned items
+" %-20.(
+"   -      left justify the item
+"   20     min width 20
+"   .[max] max width, not set
+"   (      start of item group
+" %l line number
+" %c column number
+" %V virtual column number as -{num}, not displayed if equal to %c
+" %) end of item group
+" %p percentage through file in lines as in CTRL-G
+" %% %
+set statusline+=%=%-20.((%l,%c%V)%)\ %p%%
 " show current cursor position on status line
 set ruler
 " show line number
